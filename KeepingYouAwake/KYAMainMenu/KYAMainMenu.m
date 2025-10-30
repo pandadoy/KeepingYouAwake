@@ -20,6 +20,10 @@ NSMenu *KYACreateMainMenuWithActivationDurationsSubMenu(NSMenu *activationDurati
     Auto activateForDuration = [[NSMenuItem alloc] initWithTitle:KYA_L10N_ACTIVATE_FOR_DURATION
                                                           action:nil
                                                    keyEquivalent:@""];
+    if(@available(macOS 26.0, *))
+    {
+        activateForDuration.image = [NSImage imageWithSystemSymbolName:@"timer" accessibilityDescription:nil];
+    }
     activateForDuration.submenu = activationDurationsSubMenu;
     [mainMenu addItem:activateForDuration];
     
@@ -28,6 +32,10 @@ NSMenu *KYACreateMainMenuWithActivationDurationsSubMenu(NSMenu *activationDurati
     Auto settings = [[NSMenuItem alloc] initWithTitle:KYA_L10N_SETTINGS_ELLIPSIS
                                                action:@selector(showSettingsWindow:)
                                         keyEquivalent:@","];
+    if(@available(macOS 26.0, *))
+    {
+        settings.image = [NSImage imageWithSystemSymbolName:@"gear" accessibilityDescription:nil];
+    }
     [mainMenu addItem:settings];
     
     [mainMenu addItem:NSMenuItem.separatorItem];
