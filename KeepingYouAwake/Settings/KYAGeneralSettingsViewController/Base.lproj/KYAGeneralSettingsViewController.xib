@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="KYAGeneralSettingsViewController">
             <connections>
+                <outlet property="hideMenuBarIconCheckBoxButton" destination="hide-icon-btn" id="hide-icon-outlet"/>
                 <outlet property="notificationSettingsButton" destination="OlQ-t6-SFN" id="aV4-Uq-iP7"/>
                 <outlet property="startAtLoginCheckBoxButton" destination="b2B-0v-BKX" id="XmM-6C-DT2"/>
                 <outlet property="view" destination="nJr-ua-jG7" id="MTl-QF-Qea"/>
@@ -32,6 +33,26 @@
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                 </button>
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="hide-icon-btn">
+                                    <rect key="frame" x="-2" y="21" width="120" height="18"/>
+                                    <buttonCell key="cell" type="check" title="Hide Menu Bar Icon" bezelStyle="regularSquare" imagePosition="left" state="off" inset="2" id="hide-icon-cell">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                        <string key="keyEquivalent">h</string>
+                                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="CIJ-dN-fzc" name="value" keyPath="values.info.marcel-dierkes.KeepingYouAwake.MenuBarIconHidden" id="hide-icon-binding"/>
+                                    </connections>
+                                </button>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hide-icon-help">
+                                    <rect key="frame" x="-2" y="0.0" width="289" height="14"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hides the app's icon from the menu bar." id="hide-icon-help-cell">
+                                        <font key="font" metaFont="message" size="11"/>
+                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fqh-NM-7oy">
                                     <rect key="frame" x="-2" y="0.0" width="289" height="14"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Automatically opens the app when you start your Mac." id="jxf-J8-dHN">

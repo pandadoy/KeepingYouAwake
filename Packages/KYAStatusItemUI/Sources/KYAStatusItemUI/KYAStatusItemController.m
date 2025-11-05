@@ -33,6 +33,7 @@
 {
     Auto statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.highlightMode = ![NSUserDefaults standardUserDefaults].kya_menuBarIconHighlightDisabled;
+    statusItem.visible = ![NSUserDefaults standardUserDefaults].kya_menuBarIconHidden;
     if([statusItem respondsToSelector:@selector(behavior)])
     {
         statusItem.behavior = NSStatusItemBehaviorTerminationOnRemoval;
@@ -41,13 +42,13 @@
     {
         statusItem.visible = YES;
     }
-    
+
     Auto button = statusItem.button;
-    
+
     [button sendActionOn:NSEventMaskLeftMouseUp|NSEventMaskRightMouseUp];
     button.target = self;
     button.action = @selector(toggleStatus:);
-    
+
 #if DEBUG
     if(@available(macOS 10.14, *))
     {
@@ -56,7 +57,7 @@
     Auto log = KYALogCreateWithCategory("StatusItemUI");
     os_log_debug(log, "Blue status bar item color is enabled for DEBUG builds.");
 #endif
-    
+
     self.systemStatusItem = statusItem;
     self.appearance = KYAStatusItemAppearanceInactive;
 }
@@ -65,7 +66,7 @@
 {
     Auto delegate = self.delegate;
     Auto event = NSApplication.sharedApplication.currentEvent;
-    
+
     if((event.modifierFlags & NSEventModifierFlagControl)   // ctrl click
        || (event.modifierFlags & NSEventModifierFlagOption) // alt click
        || (event.type == NSEventTypeRightMouseUp))          // right click
@@ -73,7 +74,7 @@
         [self showMenuFromDataSource];
         return;
     }
-    
+
     if([delegate respondsToSelector:@selector(statusItemControllerShouldPerformPrimaryAction:)])
     {
         [delegate statusItemControllerShouldPerformPrimaryAction:self];
@@ -91,10 +92,10 @@
 - (void)setAppearance:(KYAStatusItemAppearance)appearance
 {
     [self willChangeValueForKey:@"appearance"];
-    
+
     Auto button = self.systemStatusItem.button;
     Auto imageProvider = KYAStatusItemImageProvider.currentProvider;
-    
+
     if(appearance == KYAStatusItemAppearanceActive)
     {
         button.image = imageProvider.activeIconImage;
@@ -105,7 +106,7 @@
         button.image = imageProvider.inactiveIconImage;
         button.toolTip = KYA_L10N_CLICK_TO_PREVENT_SLEEP;
     }
-    
+
     [self didChangeValueForKey:@"appearance"];
 }
 
